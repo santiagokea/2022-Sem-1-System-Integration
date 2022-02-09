@@ -37,12 +37,15 @@ def _():
 ##############################
 @delete("/items/<item_id>")
 def _(item_id):
-  for item in items:
+  for index, item in enumerate(items):
     if item["id"] == item_id:
-      return "item deleted"
+      items.pop(index)
+      return {"info":"item deleted"}
 
   response.status = 204
-  return json.dumps({"info":f"item with id {item_id} not found"})
+  return 
+  # What? This is not displayed in the client... mmmm....
+  # return json.dumps({"info":f"item with id {item_id} not found"})
 
 
 
