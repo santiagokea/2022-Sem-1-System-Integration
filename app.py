@@ -1,9 +1,13 @@
-from bottle import delete, error, get, hook, post, request, response, run
+from bottle import delete, error, get, hook, post, put, request, response, run
 import json
 import uuid
 
 items = [
-  {"id":"5cee299b-6630-4aec-a7cc-f69947a64908", "name":"a"}
+  {
+    "id":"5cee299b-6630-4aec-a7cc-f69947a64908", 
+    "name":"a", 
+    "last_name" : "b"
+  }
 ]
 
 ##############################
@@ -22,6 +26,18 @@ def _():
 def _():
   return json.dumps(items)
 
+##############################
+@get("/items/<item_id>")
+def _(item_id):
+  # list comprehension
+  # result = [ resturn value       loop    condition  ]
+  # [{...}]
+  matches = [ item for item in items if item["id"] == item_id ]
+  if not matches:
+    response.status = 204
+    return
+
+  return matches[0]
 
 ##############################
 @post("/items")
@@ -46,6 +62,22 @@ def _(item_id):
   return 
   # What? This is not displayed in the client... mmmm....
   # return json.dumps({"info":f"item with id {item_id} not found"})
+
+
+##############################
+@put("/items/<item_id>")
+def _(item_id):
+  try:
+    item = [item for item in items if item["id"] == item_id][0]
+    return item
+  except Exception as ex:
+    print(ex) # print the exception in the terminal
+    response.status = 204
+    return
+
+
+
+
 
 
 
