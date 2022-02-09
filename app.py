@@ -65,10 +65,16 @@ def _(item_id):
 
 
 ##############################
-@put("/items/<item_id>")
+@put("/items/<item_id>") # patch
 def _(item_id):
   try:
+
+    if not request.json.get("name"):
+      pass
+
+
     item = [item for item in items if item["id"] == item_id][0]
+    item["name"] = request.json.get("name")
     return item
   except Exception as ex:
     print(ex) # print the exception in the terminal
