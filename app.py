@@ -1,4 +1,4 @@
-from bottle import get, post, request, response, run
+from bottle import error, get, hook, post, request, response, run
 import json
 import uuid
 
@@ -6,16 +6,20 @@ items = [
   {"id":"5cee299b-6630-4aec-a7cc-f69947a64908", "name":"a"}
 ]
 
+##############################
+@hook("after_request")
+def _():
+  response.content_type = "application/json"
 
 ##############################
 @get("/")
 def _():
+  response.status = 204
   return "home"
 
 ##############################
 @get("/items")
 def _():
-  response.content_type = "application/json"
   return json.dumps(items)
 
 
@@ -29,6 +33,12 @@ def _():
   print( type(item_id) )
   response.status = 201
   return {"id":item_id}
+
+##############################
+@error(404)
+def _(error):
+  response.content_type = "application/json"
+  return json.dumps({"info":"page not found"})
 
 
 
