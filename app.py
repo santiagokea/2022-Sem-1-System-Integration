@@ -3,13 +3,6 @@ import json
 import uuid
 
 
-sentence = "Hi, we are almost done for today"
-if "st" in sentence:
-  print("yes it is in it")
-else:
-  print("it is not in it")
-
-
 items = [
   {
     "id":"5cee299b-6630-4aec-a7cc-f69947a64908", 
