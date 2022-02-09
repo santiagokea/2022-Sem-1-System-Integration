@@ -2,6 +2,14 @@ from bottle import delete, error, get, hook, post, put, request, response, run
 import json
 import uuid
 
+
+sentence = "Hi, we are almost done for today"
+if "st" in sentence:
+  print("yes it is in it")
+else:
+  print("it is not in it")
+
+
 items = [
   {
     "id":"5cee299b-6630-4aec-a7cc-f69947a64908", 
@@ -69,12 +77,13 @@ def _(item_id):
 def _(item_id):
   try:
 
-    if not request.json.get("name"):
-      pass
-
-
     item = [item for item in items if item["id"] == item_id][0]
-    item["name"] = request.json.get("name")
+    for key in item.keys():
+      if key in request.json.keys():
+        item[key] = request.json.get(key)
+
+    return item
+
     return item
   except Exception as ex:
     print(ex) # print the exception in the terminal
