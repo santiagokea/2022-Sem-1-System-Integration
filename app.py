@@ -1,4 +1,4 @@
-from bottle import error, get, hook, post, request, response, run
+from bottle import delete, error, get, hook, post, request, response, run
 import json
 import uuid
 
@@ -33,6 +33,19 @@ def _():
   print( type(item_id) )
   response.status = 201
   return {"id":item_id}
+
+##############################
+@delete("/items/<item_id>")
+def _(item_id):
+  for item in items:
+    if item["id"] == item_id:
+      return "item deleted"
+
+  response.status = 204
+  return json.dumps({"info":f"item with id {item_id} not found"})
+
+
+
 
 ##############################
 @error(404)
