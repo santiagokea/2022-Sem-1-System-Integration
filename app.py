@@ -24,8 +24,11 @@ def _():
 def _():
   item_id = str(uuid.uuid4())
   item_name = request.json.get("name")
+  item = {"id":item_id, "name":item_name}
+  items.append(item)
   print( type(item_id) )
-  return item_name
+  response.status = 201
+  return {"id":item_id}
 
 
 
