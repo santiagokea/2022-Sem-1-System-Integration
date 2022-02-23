@@ -1,0 +1,32 @@
+<main style="margin:0; padding: 0; box-sizing: border-box;">
+  <img src="/images/mitid.png" alt="mitid logo">
+  <form onsubmit="return false" 
+    style="width: 100%;">
+    <input name="user_name" type="text" placeholder="username" 
+      style="width: 100%; height: 4rem; margin-top: 0.5rem; 
+      font-size: 1.2rem; padding-left: 0.5rem; outline: none;">
+    <input name="user_password" type="password" placeholder="password"
+      style="width: 100%; height: 4rem; margin-top: 0.5rem; 
+      font-size: 1.2rem; padding-left: 0.5rem; outline: none;">
+    <button onclick="login()" 
+      style="width: 100%; height: 4rem; margin-top: 0.5rem; font-size: 1.2rem;">
+      login
+    </button>
+  </form>
+  <script>
+
+    async function login(){
+      let form = document.querySelector("form")
+      let conn = await fetch("/api-login", {
+        method: "POST",
+        body : new FormData(form)
+      })
+      let res = await conn.text()
+      console.log("MITID says:", res)
+      if (res == "NO"){parent.postMessage("NO", "*"); return}
+      // SUCCESS
+      parent.postMessage("WOW", "*")
+    }
+
+  </script>
+</main>
