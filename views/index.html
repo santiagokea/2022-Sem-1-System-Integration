@@ -25,7 +25,24 @@
 
 
   <script>
+    /*
+    JWT
+    CPR
+    {
+      "cpr":"1",
+      "iat":1000,
+      "exp":1600
+    }
+    */
+
     window.addEventListener("message", event => {
+      // if(event.data == "no")
+      //   return
+      let jwt = '{"cpr": "12345","iat": 1646214642, "exp": 1646215242}'
+
+      // Validate the JWT in the server
+      // How do you pass the JWT to your own server?
+      // AJAX / FETCH
       console.log(event.data)
     }, false)
   </script>

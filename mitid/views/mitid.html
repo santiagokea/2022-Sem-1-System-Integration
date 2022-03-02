@@ -25,7 +25,8 @@
       console.log("MITID says:", res)
       if (res == "NO"){parent.postMessage("NO", "*"); return}
       // SUCCESS
-      parent.postMessage("WOW", "*")
+      // parent.postMessage("no", "*")
+      parent.postMessage('{"cpr":"1","iat":"1000","exp":"1600"}', "*")
     }
 
   </script>
