@@ -3,4 +3,4 @@
 # DB connection
 # Validation
 # return name
-email = "sand@kea.dk"
+email = "x@x.com"
